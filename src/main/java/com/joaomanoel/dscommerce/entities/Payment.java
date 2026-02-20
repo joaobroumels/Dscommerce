@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.aspectj.weaver.ast.Or;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_payment")
@@ -53,6 +54,17 @@ public class Payment {
         this.moment = moment;
         this.order = order;
 
+    }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Payment payment)) return false;
+
+        return Objects.equals(getId(), payment.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 }
